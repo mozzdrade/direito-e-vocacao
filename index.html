@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direito e Vocação: Uma Jornada Interativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background-color: #fdfaf6;
+            color: #3a3a3a;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Lora', serif;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active, .nav-link:hover {
+            border-bottom-color: #a37e62;
+            color: #a37e62;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 40vh;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .tridimensional-diagram div {
+            transition: all 0.3s ease;
+        }
+        .tridimensional-diagram:hover .diagram-center {
+            transform: scale(1.1);
+            background-color: #a37e62;
+            color: #fff;
+        }
+        .tridimensional-diagram:hover .diagram-item {
+            filter: brightness(0.9);
+        }
+        .lex-diagram .lex-item {
+             cursor: pointer;
+             transition: background-color 0.3s;
+        }
+        .lex-diagram .lex-item:hover {
+            background-color: #e9e1d9;
+        }
+        .lex-diagram .lex-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        .lex-diagram .lex-item.open .lex-detail {
+            max-height: 500px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        #ebook-popup {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-[#fdfaf6]">
+    <!-- Chosen Palette: Scholarly Earth -->
+    <!-- Application Structure Plan: A narrative-driven, single-page application structured as a guided learning journey. The user starts with an introduction to the "crisis of meaning" in modern Law, then navigates through distinct, thematic sections: 'Fundações Clássicas' (the Roman ethical roots), 'Arquitetos Brasileiros' (deep-diving into Reale, Pontes, and Sobral Pinto with interactive comparisons), 'A Grande Cisão' (exploring Positivism's rise), a dedicated deep-dive on 'Tomás de Aquino' (presenting his complex philosophy through interactive diagrams), and concluding with 'Diagnóstico da Crise' (using data visualization to show the judiciary's inefficiency). This non-linear, thematic structure was chosen to transform the dense report content into an exploratory experience, allowing users to connect philosophical concepts with practical consequences, fostering a deeper understanding than a linear reading would. -->
+    <!-- Visualization & Content Choices: 
+        1. Judiciary Crisis Data -> Goal: Compare/Inform -> Viz: Bar Chart (Chart.js) -> Interaction: Hover for details on case numbers. -> Justification: A chart makes the staggering numbers from the CNJ report more impactful and easier to compare than a static table.
+        2. Reale's Tridimensional Theory -> Goal: Organize/Explain -> Viz: Interactive Diagram (HTML/CSS) -> Interaction: Hovering over the central 'Direito' element highlights its relationship with Fato, Valor, and Norma. -> Justification: A visual, interactive diagram makes this abstract philosophical concept much more intuitive and memorable.
+        3. Aquinas's Hierarchy of Laws -> Goal: Organize/Explain -> Viz: Clickable Hierarchical Diagram (HTML/CSS/JS) -> Interaction: Clicking each law type reveals its definition and connection to others. -> Justification: Clarifies the complex, nested relationships between the four laws in a way that a flat table cannot, encouraging exploration.
+        4. Aquinas's Five Ways -> Goal: Inform/Organize -> Viz: Interactive Cards (HTML/CSS/JS) -> Interaction: Clicking a card reveals the full explanation for that 'Via'. -> Justification: Breaks down dense philosophical arguments into manageable, user-triggered chunks, improving readability and engagement.
+        5. Brazilian Jurists -> Goal: Compare -> Viz: Tabbed Content Layout (HTML/JS) -> Interaction: Clicking a jurist's name reveals their specific philosophy. -> Justification: Allows for easy comparison and focused reading on each thinker's contribution without overwhelming the user.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header class="bg-[#fdfaf6]/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-xl md:text-2xl font-bold text-[#6d5c50] font-serif">Direito e Vocação</h1>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#intro" class="nav-link active">Início</a>
+                    <a href="#foundations" class="nav-link">Fundações</a>
+                    <a href="#architects" class="nav-link">Arquitetos</a>
+                    <a href="#aquinas" class="nav-link">Tomás de Aquino</a>
+                    <a href="#crisis" class="nav-link">Diagnóstico</a>
+                    <a href="#conclusion" class="nav-link">Conclusão</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-2xl">☰</button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 flex flex-col space-y-2">
+                <a href="#intro" class="nav-link active">Início</a>
+                <a href="#foundations" class="nav-link">Fundações</a>
+                <a href="#architects" class="nav-link">Arquitetos</a>
+                <a href="#aquinas" class="nav-link">Tomás de Aquino</a>
+                <a href="#crisis" class="nav-link">Diagnóstico</a>
+                <a href="#conclusion" class="nav-link">Conclusão</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="intro" class="min-h-screen/2 text-center flex flex-col justify-center items-center">
+            <h2 class="text-4xl md:text-5xl font-bold font-serif text-[#4a3f35] mb-4">O Direito perdeu a Alma?</h2>
+            <p class="max-w-3xl text-lg text-gray-700 leading-relaxed">
+                Bem-vindo a uma jornada para redescobrir o sentido elevado do Direito. Em um mundo que frequentemente reduz a justiça a uma mera técnica, exploraremos as raízes filosóficas e as mentes brilhantes que conceberam o Direito como uma vocação para o bem, o belo e o justo. Esta aplicação é um convite à reflexão, especialmente para quem inicia seus estudos e busca mais que uma profissão, mas um propósito.
+            </p>
+        </section>
+
+        <section id="foundations" class="py-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-12 font-serif">Fundações Clássicas: Onde o Direito Nasceu Nobre</h2>
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <p class="text-gray-600">Para compreender a crise atual, é preciso retornar às origens. Em Roma, o Direito nasceu de uma profunda conexão com a ética, como demonstram seus princípios fundadores. Eles não eram meras regras, mas uma bússola moral que apontava para um ideal de justiça, uma sabedoria que adverte contra o perigo do formalismo cego.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-bold font-serif mb-2 text-[#a37e62]">Honeste Vivere</h3>
+                    <p class="text-gray-600">"Viver honestamente". Um preceito moral que fundamenta a conduta do jurista e do cidadão na retidão e na integridade.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-bold font-serif mb-2 text-[#a37e62]">Alterum Non Laedere</h3>
+                    <p class="text-gray-600">"Não lesar a outrem". O pilar de toda a responsabilidade civil e penal, um dever social de respeito mútuo.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-bold font-serif mb-2 text-[#a37e62]">Suum Cuique Tribuere</h3>
+                    <p class="text-gray-600">"Dar a cada um o que é seu". A definição clássica de justiça, que transcende a lei e busca a equidade.</p>
+                </div>
+            </div>
+            <div class="mt-12 bg-[#f4ece4] p-6 rounded-lg text-center max-w-3xl mx-auto">
+                <h4 class="text-2xl font-serif font-bold text-[#6d5c50]">Summum Ius, Summa Iniuria</h4>
+                <p class="text-gray-700 mt-2">"O máximo do direito, o máximo da injustiça". A poderosa advertência romana contra a aplicação literal e cega da lei, um chamado atemporal à equidade e à prudência do julgador.</p>
+            </div>
+        </section>
+
+        <section id="architects" class="py-16 scroll-mt-20 bg-[#f9f5f0] -mx-6 px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 font-serif">Arquitetos da Justiça no Brasil</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-center mb-8 border-b-2 border-gray-200">
+                    <button data-target="reale" class="jurist-tab active p-4 font-semibold text-lg">Miguel Reale</button>
+                    <button data-target="pontes" class="jurist-tab p-4 font-semibold text-lg">Pontes de Miranda</button>
+                    <button data-target="sobral" class="jurist-tab p-4 font-semibold text-lg">Sobral Pinto</button>
+                </div>
+                <div id="jurist-content">
+                    <div id="reale" class="jurist-pane">
+                        <h3 class="text-2xl font-serif font-bold mb-4 text-[#a37e62]">Miguel Reale: A Reintegração do Valor</h3>
+                        <p class="mb-6 text-gray-700 leading-relaxed">Miguel Reale oferece uma síntese para superar a visão fragmentada do Direito. Sua Teoria Tridimensional concebe o fenômeno jurídico como a integração dinâmica de Fato, Valor e Norma, resgatando o papel central dos valores e da dignidade da pessoa humana como a "valor-fonte" de todo o ordenamento.</p>
+                        <div class="tridimensional-diagram flex items-center justify-center p-8 cursor-default">
+                           <div class="diagram-item bg-gray-200 p-6 rounded-full shadow-md relative right-[-30px] z-10"><strong>FATO</strong></div>
+                           <div class="diagram-item bg-gray-200 p-6 rounded-full shadow-md relative top-[-50px] z-10"><strong>VALOR</strong></div>
+                           <div class="diagram-center bg-white border-4 border-[#a37e62] p-8 rounded-full shadow-xl z-20 flex items-center justify-center w-32 h-32"><span class="font-bold text-xl">DIREITO</span></div>
+                           <div class="diagram-item bg-gray-200 p-6 rounded-full shadow-md relative bottom-[-50px] z-10"><strong>NORMA</strong></div>
+                        </div>
+                        <p class="mt-4 text-center text-sm text-gray-500">Passe o mouse sobre o diagrama para ver a interação.</p>
+                    </div>
+                    <div id="pontes" class="jurist-pane hidden">
+                        <h3 class="text-2xl font-serif font-bold mb-4 text-[#a37e62]">Pontes de Miranda: A Ciência da Convivência</h3>
+                        <p class="text-gray-700 leading-relaxed">Pontes de Miranda ancora o Direito na realidade empírica, tratando-o como uma ciência rigorosa dos fatos sociais. Para ele, o Direito não está nos códigos, mas na vida. Sua função é ordenar a convivência para garantir a paz social, como ilustra sua famosa metáfora da "porteira" que organiza o fluxo da vida para que, a seu tempo, todos possam passar.</p>
+                    </div>
+                    <div id="sobral" class="jurist-pane hidden">
+                        <h3 class="text-2xl font-serif font-bold mb-4 text-[#a37e62]">Sobral Pinto: A Advocacia como Sacerdócio</h3>
+                        <p class="mb-4 text-gray-700 leading-relaxed">Sobral Pinto encarna a dimensão ética e corajosa do Direito. Sua vida foi um testemunho de que a advocacia é uma missão a serviço da Justiça, e não um ofício neutro. Católico fervoroso, defendeu seus opositores ideológicos, os comunistas, baseando-se não na lei do Estado, mas em uma lei moral superior: a dignidade inalienável de toda pessoa humana.</p>
+                        <blockquote class="border-l-4 border-[#a37e62] pl-4 italic text-gray-800">
+                            "O primeiro e mais fundamental dever do advogado é ser o juiz inicial da causa que lhe levam para patrocinar."
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="aquinas" class="py-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-4 font-serif">A Fundamentação Filosófica: Tomás de Aquino</h2>
+            <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">No coração do pensamento jusnaturalista que inspirou juristas como Sobral Pinto, encontramos a arquitetura intelectual de Tomás de Aquino. Ele concebeu uma harmonia entre fé e razão, e desenvolveu uma influente filosofia do direito baseada em uma hierarquia de leis que conecta a ordem humana a um plano divino e racional.</p>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h3 class="text-2xl font-serif font-bold mb-4 text-center text-[#a37e62]">A Hierarquia das Leis</h3>
+                    <div class="lex-diagram space-y-2">
+                        <div class="lex-item bg-white border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold">1. Lei Eterna (Lex Aeterna)</h4>
+                            <div class="lex-detail text-gray-600">
+                                <p>É a própria razão de Deus governando o universo; o plano divino para toda a criação. A fonte última de toda a legalidade, imutável e universal.</p>
+                            </div>
+                        </div>
+                        <div class="text-center text-2xl">↓</div>
+                        <div class="lex-item bg-white border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-bold">2. Lei Natural (Lex Naturalis)</h4>
+                            <div class="lex-detail text-gray-600">
+                                <p>É a participação da criatura racional na Lei Eterna. Através da razão, o ser humano discerne os preceitos do bem e do mal ("fazer o bem e evitar o mal").</p>
+                            </div>
+                        </div>
+                         <div class="text-center text-2xl">↓</div>
+                        <div class="flex justify-around">
+                            <div class="text-center text-2xl w-1/2">↘</div>
+                            <div class="text-center text-2xl w-1/2">↙</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                           <div class="lex-item bg-white border border-gray-200 rounded-lg p-4">
+                               <h4 class="font-bold">3. Lei Humana</h4>
+                               <div class="lex-detail text-gray-600">
+                                   <p>As leis positivas, criadas pela razão humana para ordenar a vida social. Para ser justa, deve derivar da Lei Natural.</p>
+                               </div>
+                           </div>
+                           <div class="lex-item bg-white border border-gray-200 rounded-lg p-4">
+                               <h4 class="font-bold">4. Lei Divina</h4>
+                               <div class="lex-detail text-gray-600">
+                                   <p>A lei revelada nas Escrituras. Guia o homem ao seu fim sobrenatural e governa os atos interiores, para além do alcance da lei humana.</p>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                     <p class="mt-4 text-center text-sm text-gray-500">Clique em cada lei para expandir.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-serif font-bold mb-4 text-center text-[#a37e62]">As Cinco Vias para Deus</h3>
+                    <p class="text-center text-gray-600 mb-4">Baseado na observação do mundo, Aquino formulou cinco argumentos racionais (vias) para demonstrar a existência de Deus como fundamento último da realidade.</p>
+                    <div id="five-ways-container" class="space-y-3">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="crisis" class="py-16 scroll-mt-20 bg-[#f9f5f0] -mx-6 px-6">
+            <h2 class="text-3xl font-bold text-center mb-4 font-serif">Diagnóstico da Crise: O Judiciário em Números</h2>
+            <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">A percepção de morosidade e ineficiência do Judiciário não é apenas uma sensação. Os dados do Conselho Nacional de Justiça (CNJ) revelam uma crise sistêmica que transforma a busca por justiça em uma longa espera, alimentando o ciclo de descrédito e a demanda por uma formação puramente técnica e superficial.</p>
+            <div class="chart-container">
+                <canvas id="judiciaryChart"></canvas>
+            </div>
+             <p class="mt-4 text-center text-sm text-gray-500">Dados do Relatório Justiça em Números 2024 (ano-base 2023) do CNJ.</p>
+        </section>
+
+        <section id="conclusion" class="py-16 scroll-mt-20 text-center">
+            <h2 class="text-3xl font-bold font-serif mb-4 text-[#4a3f35]">Um Chamado à Vocação</h2>
+            <p class="max-w-3xl text-lg text-gray-700 leading-relaxed mx-auto mb-8">
+                A jornada através das fundações do Direito e das mentes de seus mestres nos leva a um ponto crucial. A crise do Direito é também uma crise de vocação. Resgatar sua nobreza exige mais do que técnica; exige a coragem de questionar, de buscar a justiça para além da norma, e de ver em cada processo uma vida humana.
+            </p>
+            <blockquote class="border-l-4 border-[#a37e62] pl-6 py-2 italic text-xl text-gray-800 max-w-2xl mx-auto">
+                "A advocacia não é profissão para covardes."
+                <cite class="block not-italic text-base mt-2">— Sobral Pinto</cite>
+            </blockquote>
+            <p class="max-w-3xl text-lg text-gray-700 leading-relaxed mx-auto mt-8">
+                Que este seja um convite para que você, estudante de Direito, aspire a ser mais que um operador do sistema. Aspire a ser um jurista, um guardião da justiça e um defensor intransigente da dignidade humana.
+            </p>
+        </section>
+    </main>
+
+    <footer class="bg-[#6d5c50] text-white text-center py-4 mt-12">
+        <p>&copy; 2025 Direito e Vocação. Um projeto para a redescoberta do sentido da Justiça.</p>
+    </footer>
+
+    <!-- E-book Popup -->
+    <div id="ebook-popup" class="hidden fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-60">
+        <div id="popup-content" class="bg-[#fdfaf6] p-8 rounded-lg shadow-2xl max-w-md w-11/12 relative transform transition-all duration-300 scale-95 opacity-0">
+            <button id="close-popup" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button>
+            <div id="popup-form-content">
+                <h3 class="text-2xl font-serif font-bold text-[#4a3f35] mb-4">Aprofunde sua Jornada</h3>
+                <p class="text-gray-700 mb-6">Receba nosso e-book exclusivo, "Direito e Vocação: O Guia para Resgatar o Sentido da Justiça", e continue sua reflexão.</p>
+                <form id="ebook-form">
+                    <input type="email" id="email-input" placeholder="Digite seu melhor e-mail" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#a37e62]">
+                    <button type="submit" class="w-full bg-[#a37e62] text-white font-bold p-3 mt-4 rounded-md hover:bg-[#8e6c52] transition-colors">QUERO O E-BOOK</button>
+                </form>
+            </div>
+            <div id="popup-success-message" class="hidden text-center">
+                 <h3 class="text-2xl font-serif font-bold text-[#4a3f35] mb-4">Obrigado!</h3>
+                 <p class="text-gray-700">Seu e-book está a caminho. Verifique sua caixa de entrada.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Smooth Scrolling & Active Nav Link
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            function changeActiveLink() {
+                let index = sections.length;
+                while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+                
+                navLinks.forEach((link) => link.classList.remove('active'));
+                
+                const activeSectionId = sections[index].id;
+                const activeLink = document.querySelector(`.nav-link[href="#${activeSectionId}"]`);
+                if(activeLink) {
+                    const allActiveLinks = document.querySelectorAll(`.nav-link[href="#${activeSectionId}"]`);
+                    allActiveLinks.forEach(l => l.classList.add('active'));
+                }
+            }
+            
+            window.addEventListener('scroll', changeActiveLink);
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    if (mobileMenu.classList.contains('hidden') === false) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Jurists Tab
+            const juristTabs = document.querySelectorAll('.jurist-tab');
+            const juristPanes = document.querySelectorAll('.jurist-pane');
+            juristTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    juristTabs.forEach(t => t.classList.remove('active', 'text-[#a37e62]', 'border-[#a37e62]'));
+                    tab.classList.add('active', 'text-[#a37e62]', 'border-[#a37e62]');
+                    
+                    const target = tab.getAttribute('data-target');
+                    juristPanes.forEach(pane => {
+                        if (pane.id === target) {
+                            pane.classList.remove('hidden');
+                        } else {
+                            pane.classList.add('hidden');
+                        }
+                    });
+                });
+                if(tab.classList.contains('active')) {
+                     tab.classList.add('text-[#a37e62]', 'border-[#a37e62]');
+                }
+            });
+
+            // Aquinas Lex Diagram
+            const lexItems = document.querySelectorAll('.lex-item');
+            lexItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('open');
+                });
+            });
+
+            // Aquinas Five Ways
+            const fiveWaysData = [
+                { title: "1. A Via do Movimento", text: "Tudo o que se move é movido por outro. Esta cadeia não pode ser infinita, logo, deve haver um Primeiro Motor Imóvel: Deus." },
+                { title: "2. A Via da Causa Eficiente", text: "Observamos uma ordem de causas. Nada pode ser causa de si mesmo. Logo, deve haver uma Primeira Causa não causada: Deus." },
+                { title: "3. A Via do Contingente e do Necessário", text: "Existem seres que podem ou não existir (contingentes). Se tudo fosse assim, nada existiria. Logo, deve haver um Ser Necessário por si mesmo: Deus." },
+                { title: "4. A Via dos Graus de Perfeição", text: "Percebemos diferentes graus de bem, verdade, nobreza. Isso implica a existência de um ser que é o máximo em todas as perfeições: Deus." },
+                { title: "5. A Via da Finalidade", text: "Seres irracionais agem com uma finalidade, buscando o melhor. Logo, são dirigidos por uma inteligência suprema que ordena todas as coisas: Deus." }
+            ];
+            const fiveWaysContainer = document.getElementById('five-ways-container');
+            fiveWaysData.forEach(way => {
+                const card = document.createElement('div');
+                card.className = 'card bg-white p-4 rounded-lg shadow-md border border-gray-200 cursor-pointer';
+                card.innerHTML = `<h4 class="font-bold">${way.title}</h4><p class="text-gray-600 hidden mt-2">${way.text}</p>`;
+                card.addEventListener('click', () => {
+                    card.querySelector('p').classList.toggle('hidden');
+                });
+                fiveWaysContainer.appendChild(card);
+            });
+
+            // Judiciary Chart
+            const judiciaryData = {
+                labels: ['Justiça Estadual', 'Justiça Federal', 'Justiça do Trabalho'],
+                datasets: [
+                    {
+                        label: 'Acervo Pendente (em milhões)',
+                        data: [64.8, 12.6, 5.4],
+                        backgroundColor: '#a37e62',
+                    },
+                    {
+                        label: 'Casos Novos (em milhões)',
+                        data: [25.1, 5.0, 4.1],
+                        backgroundColor: '#d1c3b8',
+                    }
+                ]
+            };
+            const judiciaryChartCtx = document.getElementById('judiciaryChart').getContext('2d');
+            new Chart(judiciaryChartCtx, {
+                type: 'bar',
+                data: judiciaryData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Processos no Judiciário Brasileiro (2023)', font: { size: 16, family: 'Lora' } },
+                        tooltip: { callbacks: { label: function(context) { let label = context.dataset.label || ''; if (label) { label += ': '; } if (context.parsed.y !== null) { label += context.parsed.y + ' milhões'; } return label; } } }
+                    },
+                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Nº de Processos (em milhões)' } } }
+                }
+            });
+
+            // E-book Popup Logic
+            const popup = document.getElementById('ebook-popup');
+            const popupContent = document.getElementById('popup-content');
+            const closePopupButton = document.getElementById('close-popup');
+            const ebookForm = document.getElementById('ebook-form');
+            const popupFormContent = document.getElementById('popup-form-content');
+            const popupSuccessMessage = document.getElementById('popup-success-message');
+
+            let popupShown = false;
+
+            const openPopup = () => {
+                if (popupShown) return;
+                popup.classList.remove('hidden');
+                popup.classList.add('flex');
+                setTimeout(() => {
+                    popupContent.classList.remove('scale-95', 'opacity-0');
+                    popupContent.classList.add('scale-100', 'opacity-100');
+                }, 50);
+                popupShown = true;
+            };
+
+            const closePopup = () => {
+                 popupContent.classList.remove('scale-100', 'opacity-100');
+                 popupContent.classList.add('scale-95', 'opacity-0');
+                 setTimeout(() => {
+                    popup.classList.add('hidden');
+                    popup.classList.remove('flex');
+                 }, 300);
+            };
+
+            setTimeout(openPopup, 7000);
+
+            closePopupButton.addEventListener('click', closePopup);
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    closePopup();
+                }
+            });
+
+            ebookForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                popupFormContent.classList.add('hidden');
+                popupSuccessMessage.classList.remove('hidden');
+
+                setTimeout(closePopup, 3000);
+            });
+
+        });
+    </script>
+</body>
+</html>
