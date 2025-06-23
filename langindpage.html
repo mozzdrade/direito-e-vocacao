@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Direito com Alma: Da Técnica à Vocação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background-color: #fdfaf6;
+            color: #3a3a3a;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Lora', serif;
+        }
+        .cta-button {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .highlight-check {
+            color: #a37e62;
+        }
+    </style>
+</head>
+<body class="bg-[#fdfaf6]">
+
+    <!-- HERO SECTION -->
+    <section class="bg-[#f4ece4] py-20 px-6 text-center">
+        <div class="container mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold font-serif text-[#4a3f35] max-w-4xl mx-auto">Para o Estudante de Direito que Sonhava com Justiça e Encontrou Apenas Burocracia</h1>
+            <p class="text-lg md:text-xl mt-6 text-gray-700 max-w-2xl mx-auto">Redescubra a alma, a nobreza e o propósito que te fizeram escolher esta profissão. Transforme sua carreira antes mesmo de começar, conectando-se com a verdadeira vocação da Toga.</p>
+            <a href="#pricing" class="cta-button inline-block bg-[#a37e62] text-white font-bold text-lg px-10 py-4 rounded-lg mt-10 shadow-lg">
+                QUERO RESGATAR MINHA VOCAÇÃO
+            </a>
+            <p class="mt-4 text-sm text-gray-600">Vagas limitadas para garantir a qualidade da interação.</p>
+        </div>
+    </section>
+
+    <!-- PAIN & AGITATION SECTION -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold font-serif text-center mb-12">Você se identifica com algum destes sentimentos?</h2>
+            <div class="grid md:grid-cols-2 gap-8 text-lg">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <p><span class="font-bold text-red-700">Decepção.</span> A distância entre o ideal de justiça que o motivou e a realidade fria e pragmática dos processos e da política.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <p><span class="font-bold text-red-700">Cinismo.</span> A sensação de que o Direito é apenas um jogo de poder e interesses, onde a verdade e o bem têm pouco espaço.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <p><span class="font-bold text-red-700">Vazio.</span> O estudo puramente técnico de leis e doutrinas, sem uma conexão com as grandes questões humanas e filosóficas.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <p><span class="font-bold text-red-700">Medo.</span> O receio de se tornar apenas mais um "operador do direito" medíocre, sem um diferencial e sem propósito.</p>
+                </div>
+            </div>
+            <p class="text-center text-xl mt-12 text-gray-800 leading-relaxed">Se você disse sim a algum deles, saiba que não está sozinho. A crise de sentido no Direito é real, mas ela não precisa ser o seu destino.</p>
+        </div>
+    </section>
+
+    <!-- SOLUTION & COURSE INTRODUCTION -->
+    <section class="bg-[#f9f5f0] py-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h3 class="text-lg font-semibold uppercase tracking-wider text-[#a37e62]">A SOLUÇÃO</h3>
+            <h2 class="text-3xl md:text-4xl font-bold font-serif mt-4 mb-6">Apresentando o Curso Online<br>"Direito com Alma: Da Técnica à Vocação"</h2>
+            <p class="text-xl leading-relaxed text-gray-700">Uma jornada imersiva e transformadora para resgatar a visão elevada do Direito. Neste curso, você não vai apenas aprender sobre leis. Você vai se conectar com a sabedoria dos grandes mestres, desde os juristas romanos até os gigantes brasileiros, para construir uma base sólida que irá diferenciar sua carreira e dar um novo sentido à sua prática jurídica.</p>
+            <div class="mt-12">
+                 <!-- [Image of Um livro antigo de direito aberto sobre uma mesa de madeira, com uma luz suave incidindo sobre as páginas] -->
+                 <img src="https://placehold.co/800x400/f4ece4/6d5c50?text=Direito+com+Alma" alt="Livro representando o curso Direito com Alma" class="rounded-lg shadow-xl mx-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULES SECTION (ACCORDION) -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-3xl md:text-4xl font-bold font-serif text-center mb-12">O que você vai dominar neste curso?</h2>
+            <div class="space-y-4" id="accordion-container">
+                <!-- Módulo 1 -->
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-xl font-serif font-bold text-[#6d5c50]">Módulo 1: O Diagnóstico - Por que o Direito Perdeu a Alma?</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>Analisaremos a crise do positivismo jurídico e como a obsessão pela técnica nos afastou das questões sobre justiça, ética e verdade. Você entenderá a raiz do problema para poder superá-lo.</p>
+                    </div>
+                </div>
+                <!-- Módulo 2 -->
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-xl font-serif font-bold text-[#6d5c50]">Módulo 2: Fundações Sólidas - A Nobreza em Roma e na Grécia</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>Uma viagem às origens para redescobrir o Direito como "a arte do bom e do equitativo". Veremos como conceitos como <i>Honeste Vivere</i> e <i>Summum Ius, Summa Iniuria</i> são mais atuais do que nunca.</p>
+                    </div>
+                </div>
+                <!-- Módulo 3 -->
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-xl font-serif font-bold text-[#6d5c50]">Módulo 3: Os Arquitetos Brasileiros - Reale, Pontes e Sobral Pinto</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>Um mergulho profundo no pensamento dos juristas que se recusaram a ver o Direito como um manual de regras. Você aprenderá a aplicar a Teoria Tridimensional e a ver a advocacia como um sacerdócio.</p>
+                    </div>
+                </div>
+                <!-- Módulo 4 -->
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-xl font-serif font-bold text-[#6d5c50]">Módulo 4: A Bússola da Justiça - A Filosofia de Tomás de Aquino</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>Desmistificaremos a obra do Doutor Angélico, entendendo sua hierarquia das leis (Eterna, Natural, Humana, Divina) e como essa visão oferece uma base segura para o raciocínio jurídico e para a busca da justiça.</p>
+                    </div>
+                </div>
+                <!-- Módulo 5 -->
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-xl font-serif font-bold text-[#6d5c50]">Módulo 5: A Prática com Propósito - Aplicando a Visão no Século XXI</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>O módulo final que conecta toda a teoria à sua realidade. Desenvolveremos um framework para a tomada de decisões éticas, a construção de peças com mais profundidade e a redescoberta da sua vocação na advocacia, magistratura, ou qualquer carreira jurídica.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- TESTIMONIALS SECTION -->
+    <section class="bg-[#f4ece4] py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold font-serif text-center mb-12">O que dizem os nossos alunos?</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <p class="text-gray-700 italic">"Este curso foi um oásis no deserto da faculdade. Eu estava prestes a desistir, achando tudo muito raso. O 'Direito com Alma' me reconectou com o motivo pelo qual eu comecei. Indispensável."</p>
+                    <div class="mt-4 flex items-center">
+                        <!-- [Image of Foto de perfil de uma jovem estudante, sorrindo] -->
+                        <img src="https://placehold.co/50x50/a37e62/FFFFFF?text=J" class="rounded-full" alt="Foto de Juliana R.">
+                        <div class="ml-4">
+                            <p class="font-bold">Juliana R.</p>
+                            <p class="text-sm text-gray-600">Estudante do 7º Semestre</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <p class="text-gray-700 italic">"Como jovem advogado, sentia que faltava algo, um 'tempero' nas minhas peças e na minha argumentação. Este curso me deu a profundidade filosófica que eu precisava para me destacar. Os clientes percebem."</p>
+                    <div class="mt-4 flex items-center">
+                         <!-- [Image of Foto de perfil de um jovem advogado de terno, com um olhar confiante] -->
+                        <img src="https://placehold.co/50x50/6d5c50/FFFFFF?text=M" class="rounded-full" alt="Foto de Marcos B.">
+                        <div class="ml-4">
+                            <p class="font-bold">Marcos B.</p>
+                            <p class="text-sm text-gray-600">Advogado, 2 anos de OAB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING & OFFER SECTION -->
+    <section id="pricing" class="py-20 px-6 scroll-mt-20">
+        <div class="container mx-auto max-w-2xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold font-serif mb-8">Faça sua inscrição e transforme sua visão sobre o Direito</h2>
+            <div class="bg-white border-2 border-[#a37e62] rounded-xl shadow-2xl p-8">
+                <h3 class="font-serif text-2xl font-bold mb-4">Acesso Completo ao Curso "Direito com Alma"</h3>
+                <ul class="text-left space-y-3 my-8">
+                    <li class="flex items-start"><span class="highlight-check mr-3 text-2xl">✓</span> <span>5 Módulos com aulas profundas e diretas ao ponto</span></li>
+                    <li class="flex items-start"><span class="highlight-check mr-3 text-2xl">✓</span> <span>Acesso vitalício ao conteúdo e futuras atualizações</span></li>
+                    <li class="flex items-start"><span class="highlight-check mr-3 text-2xl">✓</span> <span>Material de apoio em PDF com os pontos principais de cada aula</span></li>
+                    <li class="flex items-start"><span class="highlight-check mr-3 text-2xl">✓</span> <span class="font-bold">BÔNUS 1:</span> Comunidade Exclusiva no Telegram para networking e debates</li>
+                    <li class="flex items-start"><span class="highlight-check mr-3 text-2xl">✓</span> <span class="font-bold">BÔNUS 2:</span> 2 Sessões de Mentoria em Grupo para tirar dúvidas</li>
+                    <li class="flex items-start"><span class="highlight-check mr-3 text-2xl">✓</span> <span class="font-bold">BÔNUS 3:</span> Biblioteca de Clássicos com obras essenciais em domínio público</li>
+                </ul>
+                <p class="text-gray-600 line-through">De R$ 997,00</p>
+                <p class="text-2xl font-bold">Por apenas 12x de</p>
+                <p class="text-7xl font-bold font-serif text-[#a37e62] my-2">R$ 49,90</p>
+                <p class="mb-8">(ou R$ 497,00 à vista)</p>
+
+                <a href="#payment-form" class="cta-button inline-block bg-[#a37e62] text-white font-bold text-xl px-12 py-5 rounded-lg shadow-lg w-full">
+                    SIM, EU QUERO TER DIREITO COM ALMA
+                </a>
+            </div>
+            <div class="mt-8">
+                <!-- [Image of Um selo de garantia de 15 dias] -->
+                <img src="https://placehold.co/150x150/fdfaf6/3a3a3a?text=Garantia+de+15+dias" alt="Selo de Garantia de 15 dias" class="mx-auto">
+                <p class="mt-4 text-gray-700"><b>Garantia Incondicional de 15 Dias.</b> Se por qualquer motivo você não se sentir transformado pelo curso, basta pedir o reembolso e devolveremos 100% do seu investimento. Sem perguntas, sem ressentimentos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="bg-[#f9f5f0] py-20 px-6">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-3xl md:text-4xl font-bold font-serif text-center mb-12">Perguntas Frequentes</h2>
+            <div class="space-y-4" id="faq-accordion-container">
+                 <div class="accordion-item bg-white rounded-lg shadow-sm border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-lg font-semibold">Para quem é este curso?</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>É ideal para estudantes de Direito em qualquer semestre, bacharéis recém-formados e jovens advogados que sentem um descompasso entre a teoria da justiça e a prática diária. Também é valioso para qualquer profissional do Direito que queira reacender sua paixão pela área.</p>
+                    </div>
+                </div>
+                 <div class="accordion-item bg-white rounded-lg shadow-sm border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-lg font-semibold">Preciso ter conhecimento prévio de filosofia?</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>Não. O curso foi desenhado para ser acessível a todos. Explicamos os conceitos filosóficos complexos de maneira clara e sempre com foco na sua aplicação prática no Direito.</p>
+                    </div>
+                </div>
+                 <div class="accordion-item bg-white rounded-lg shadow-sm border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-lg font-semibold">Por quanto tempo terei acesso?</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>O acesso é vitalício. Você pode assistir às aulas no seu ritmo, quantas vezes quiser, e terá acesso a todas as futuras atualizações do curso sem custo adicional.</p>
+                    </div>
+                </div>
+                 <div class="accordion-item bg-white rounded-lg shadow-sm border border-gray-200">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center">
+                        <span class="text-lg font-semibold">O curso oferece certificado?</span>
+                        <span class="text-2xl font-bold text-[#a37e62]">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 text-gray-700">
+                        <p>Sim. Ao concluir todas as aulas, você receberá um certificado de conclusão que poderá ser usado para enriquecer seu currículo e comprovar horas complementares (verifique a aceitação na sua instituição).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 px-6 text-center bg-[#f4ece4]">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#4a3f35]">Chega de ser apenas mais um. Torne-se um jurista com alma.</h2>
+            <p class="text-lg mt-6 text-gray-700">A decisão de se aprofundar, de buscar um diferencial e de resgatar sua vocação é o que separa os profissionais comuns dos extraordinários. Dê hoje o passo mais importante da sua carreira.</p>
+            <a href="#pricing" class="cta-button inline-block bg-[#a37e62] text-white font-bold text-lg px-10 py-4 rounded-lg mt-10 shadow-lg">
+                QUERO MINHA VAGA AGORA
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-[#6d5c50] text-white text-center py-6 px-6">
+        <p>&copy; 2025 Direito com Alma. Todos os direitos reservados.</p>
+        <p class="text-sm mt-2">Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook. Depois que você sair do Facebook, a responsabilidade não é deles e sim do nosso site.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function setupAccordion(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                const items = container.querySelectorAll('.accordion-item');
+
+                items.forEach(item => {
+                    const header = item.querySelector('.accordion-header');
+                    const content = item.querySelector('.accordion-content');
+                    const icon = header.querySelector('span:last-child');
+
+                    header.addEventListener('click', () => {
+                        // Close other items
+                        items.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                                otherItem.querySelector('.accordion-header span:last-child').textContent = '+';
+                            }
+                        });
+
+                        // Toggle current item
+                        if (content.style.maxHeight) {
+                            content.style.maxHeight = null;
+                            icon.textContent = '+';
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + 'px';
+                            icon.textContent = '-';
+                        }
+                    });
+                });
+            }
+
+            setupAccordion('accordion-container');
+            setupAccordion('faq-accordion-container');
+        });
+    </script>
+</body>
+</html>
